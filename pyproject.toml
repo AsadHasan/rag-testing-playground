@@ -1,0 +1,41 @@
+[project]
+name = "rag-testing-playground"
+version = "0.1.0"
+description = "Practice building and testing simple RAG app"
+authors = [
+    {name = "asadhasan180@hotmail.com"}
+]
+license = {text = "MIT"}
+readme = "README.md"
+requires-python = ">=3.11,<3.14"
+dependencies = [
+    "llama-index (>=0.12.32,<0.13.0)",
+    "llama-index-readers-wikipedia (>=0.3.0,<0.4.0)",
+    "chromadb (>=1.0.6,<2.0.0)",
+    "llama-index-callbacks-arize-phoenix (>=0.5.1,<0.6.0)",
+    "wikipedia (>=1.4.0,<2.0.0)",
+    "llama-index-vector-stores-chroma (>=0.4.1,<0.5.0)",
+    "llama-index-embeddings-huggingface (>=0.5.3,<0.6.0)",
+    "llama-index-llms-ollama (>=0.5.4,<0.6.0)"
+]
+
+[tool.poetry]
+packages = [
+    { include = "src" }, { include = "test" }
+]
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.5"
+ragas = "^0.2.14"
+mypy = "^1.15.0"
+pylint = "^3.3.6"
+bandit = "^1.8.3"
+pydocstyle = "^6.3.0"
+pycodestyle = "^2.13.0"
+prospector = "^1.16.1"
+isort = "^6.0.1"
+ruff = "^0.11.6"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
