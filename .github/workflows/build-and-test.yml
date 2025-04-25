@@ -20,7 +20,5 @@ jobs:
     build-and-test:
         runs-on: ubuntu-24.04
         steps:
-            - name: Build
-              run: echo 'hello'
-            - name: Test
-              run: echo 'hi'
+            - name: Build and test
+              run: docker compose run rag && docker compose down
