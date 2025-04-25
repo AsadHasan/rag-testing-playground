@@ -2,7 +2,7 @@ FROM python:3.14.0a7
 
 WORKDIR /app
 
-COPY src .
+COPY src ./src
 COPY pyproject.toml .
 COPY README.md .
 
@@ -14,4 +14,4 @@ RUN python3 -m pip install --user --no-cache-dir pipx==1.7.1 \
     && poetry config virtualenvs.in-project true \
     && poetry install --no-root
 
-ENTRYPOINT [ "./src/rag.py" ]
+ENTRYPOINT ["bash", "-c"]

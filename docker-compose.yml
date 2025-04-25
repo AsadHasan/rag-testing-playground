@@ -1,0 +1,32 @@
+services:
+  ollama:
+    container_name: ollama
+    image: ollama/ollama:0.6.6
+    volumes:
+      - ./ollama/ollama:/root/.ollama
+    ports:
+      - 11434:11434
+    entrypoint: ["/usr/bin/sh", "-c"]
+    environment:
+      - OLLAMA_LLM_MODEL=${OLLAMA_LLM_MODEL?OLLAMA_LLM_MODEL not set}
+    command: "'ollama serve & ollama pull \"${OLLAMA_LLM_MODEL}\" || sleep 5 && ollama pull \"${OLLAMA_LLM_MODEL}\" && tail -f /dev/null'"
+  ollama-healthcheck:
+    container_name: ollama-healthcheck
+    depends_on:
+      - ollama
+    image: curlimages/curl:8.13.0
+    entrypoint: ["sh", "-c"]
+    command: ["sleep 60"]
+    healthcheck:
+      test: ["CMD", "curl", "-fv", "http://ollama:11434"]
+      interval: 60s
+      retries: 15
+      start_period: 20s
+      timeout: 90s
+  rag:
+    depends_on:
+      ollama-healthcheck:
+        condition: service_completed_successfully
+    build: .
+    container_name: rag
+    command: "'. ./.venv/bin/activate && ./src/rag.py'"

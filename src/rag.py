@@ -22,8 +22,14 @@ def main() -> None:
             "RAG",
         ],
     )
-    Settings.embed_model = HuggingFaceEmbedding(model_name=os.getenv("HF_EMBEDDING_MODEL", "BAAI/bge-large-en-v1.5"))
-    Settings.llm = Ollama(model=os.getenv("OLLAMA_LLM_MODEL", "llama3.2"), request_timeout=os.getenv("TIMEOUT", 300))
+    Settings.embed_model = HuggingFaceEmbedding(
+        model_name=os.getenv("HF_EMBEDDING_MODEL", "BAAI/bge-large-en-v1.5")
+    )
+    Settings.llm = Ollama(
+        model=os.getenv("OLLAMA_LLM_MODEL", "llama3.2"),
+        request_timeout=os.getenv("TIMEOUT", 300),
+        base_url=os.getenv("OLLAMA_URL", "http://ollama:11434"),
+    )
     chroma_client = chromadb.Client()
     collection = chroma_client.create_collection(name="Wiki-pages")
     vector_store = ChromaVectorStore(chroma_collection=collection)
