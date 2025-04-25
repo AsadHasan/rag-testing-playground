@@ -12,6 +12,6 @@ RUN python3 -m pip install --user --no-cache-dir pipx==1.7.1 \
     && pipx ensurepath --global \
     && pipx install poetry==2.1.2 \
     && poetry config virtualenvs.in-project true \
-    && poetry install --no-root
+    && poetry install --no-root --without dev
 
 ENTRYPOINT ["bash", "-c"]
