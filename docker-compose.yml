@@ -27,6 +27,8 @@ services:
     depends_on:
       ollama-healthcheck:
         condition: service_completed_successfully
-    build: .
+    build:
+      context: .
+      target: final
     container_name: rag
     command: "'. ./.venv/bin/activate && ./src/rag.py'"

@@ -32,6 +32,7 @@ jobs:
                 load: true
                 cache-from: type=gha
                 cache-to: type=gha,mode=max
+                target: final
             - name: Build and test
               env:
                 OLLAMA_LLM_MODEL: llama3.2
