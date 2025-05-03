@@ -26,6 +26,11 @@ jobs:
               uses: docker/setup-buildx-action@b5ca514318bd6ebac0fb2aedd5d36ec1b5c232a2 # v.3.10.0
               with:
                 install: true
+            - name: Docker image caching
+              uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
+              with:
+                  path: /var/lib/docker
+                  key: ${{ runner.os }}-docker
             - name: Build and cache Docker image
               uses: docker/build-push-action@14487ce63c7a62a4a324b0bfb37086795e31c6c1 # v6.16.0
               with:
