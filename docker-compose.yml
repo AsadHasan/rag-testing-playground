@@ -30,9 +30,5 @@ services:
     build:
       context: .
       target: final
-      cache_from:
-        - type=gha
-      cache_to:
-        - type=gha
     container_name: rag
     command: "'. ./.venv/bin/activate && ./src/rag.py'"

@@ -5,3 +5,5 @@ Dockerfile
 LICENSE
 *git*
 ollama
+.env
+README.md
